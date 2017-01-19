@@ -160,38 +160,22 @@
             BUTTONS
     /*****************************************************************************************************************************************************************************************
     -->
-    <a-entity id="buttons_scene_one" position="0 0.5 0" active visible>
-
-        <a-entity template="src: #linkButtonsChangeScene" id="buttonone" data-thumb="#amarker" data-target="#planeVideo2L"
-                  data-src="../../videos/bedoctor/HipVideoUnity.mp4"
-                  data-first="imgButton1" data-rotation="0 0 0" data-position="-0.18 0.35 -5"
-                  data-scene="2"></a-entity>
-
-        <a-entity template="src: #linkButtonsChangeScene" id="buttontwo" data-thumb="#bmarker" data-target="#planeVideo3"
-                  data-src="../../videos/bedoctor/Dicom_TimeLapse.mp4"
-                  data-first="imgButton2" data-rotation="0 0 0" data-rotchild="0 180 0" data-position="-1.8 1.65 -2"
-                  data-scene="3"></a-entity>
-
-        <a-entity template="src: #linkButtonsChangeScene" id="buttonthree" data-thumb="#cmarker" data-target="#planeVideo4"
-                  data-src="../../videos/bedoctor/ZimmerTools.mp4"
-                  data-first="imgButton3" data-rotation="0 0 0" data-rotchild="45 180 0" data-position="0.5 1 0"
-                  data-scene="4"></a-entity>
-    </a-entity>
+    
 
     <a-entity id="persistentbuttons" position="0 1.5 0"> <!-- layout="layout: line; margin: 1.5" -->
-        <!-- 6 angles 0, -60, -120, -180, -240, -300, -280, -320 -->
+        <!-- 5 angles 0, -60, -120, -180, -240, -300 -->
         <a-entity template="src: #linkButtonsChangeScene" id="btn1" data-src="../../videos/tossamar/TossaMarLandscape.mp4" data-thumb="#TossaLandscapeThumb"
                   data-first="maphallbutton1" data-rotation="0 0 0"></a-entity>
         <a-entity template="src: #linkButtonsChangeScene" id="btn2" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4" data-thumb="#TossaGhoticChurchMainThumb"
-                  data-first="maphallbutton2" data-rotation="0 -40 0"></a-entity>
+                  data-first="maphallbutton2" data-rotation="0 -60 0"></a-entity>
         <a-entity template="src: #linkButtonsChangeScene" id="btn3" data-src="../../videos/tossamar/Granados360.mp4" data-thumb="#SofiaRestaurantThumb"
-                  data-first="maphallbutton3" data-rotation="0 -80 0"></a-entity>
+                  data-first="maphallbutton3" data-rotation="0 -120 0"></a-entity>
         <a-entity template="src: #linkButtonsChangeScene" id="btn4" data-src="../../videos/tossamar/GranadosTerraceOne.mp4" data-thumb="#SofiaChillOutThumb"
-                  data-first="maphallbutton4" data-rotation="0 -120 0"></a-entity>
+                  data-first="maphallbutton4" data-rotation="0 -180 0"></a-entity>
         <a-entity template="src: #linkButtonsChangeScene" id="btn5" data-src="../../videos/tossamar/DianaChimney.mp4" data-thumb="#DianaChimneyRoomThumb"
-                  data-first="maphallbutton5" data-rotation="0 -160 0"></a-entity>
+                  data-first="maphallbutton5" data-rotation="0 -240 0"></a-entity>
         <a-entity template="src: #linkButtonsChangeScene" id="btn6" data-src="../../videos/tossamar/DianaSolarium.mp4" data-thumb="#DianaFountainThumb"
-                  data-first="maphallbutton6" data-rotation="0 -200 0"></a-entity>
+                  data-first="maphallbutton6" data-rotation="0 -300 0"></a-entity>
     </a-entity>
 
 </a-entity>
@@ -237,64 +221,6 @@
     -->
 </a-entity>
 
-
-<a-entity id="Scene_two_parent" active visible position="0 0 0">
-
-    <a-camera visible="false" active="false" id="player2" position="0 0 0" stereocam="eye:left;">
-        <a-cursor id="cursor2" visible active color="red"></a-cursor>
-    </a-camera>
-
-    <a-entity id="links2" active visible position="0 0 0">
-        <!-- material="shader: flat; src: #hipsbs; repeat: 0.5 1"  -->
-        <a-plane id="planeVideo2L" scale="8 5 1" material="shader: flat; repeat: 0.5 1; src:#other360" position="0 1 -6"
-                 stereo="eye:left"></a-plane>
-        <a-plane id="planeVideo2R" scale="8 5 1" material="shader: flat; repeat:-0.5 1; src:#other360" position="0 1 -6"
-                 stereo="eye:right"></a-plane>
-
-        <a-entity template="src: #linkButtonsChangeScene" id="buttonback2" data-thumb="#rmarker" data-target="#videosphere"
-                  data-src="../../videos/bedoctor/360SurgeonOneMinute_1136_640.mp4"
-                  data-first="imgButtonback2" data-rotation="0 180 0" data-position="-0.18 0.25 0" data-scene="1"></a-entity>
-    </a-entity>
-</a-entity>
-
-<a-entity id="Scene_three_parent" active visible position="0 0 0">
-
-    <a-entity id="links3" active visible position="0 0 0">
-        <!-- shader: flat; src: #dicom; -->
-        <a-plane id="planeVideo3" scale="8 5 1" material="shader:flat; src:#other360" position="0 1 -6"
-                ></a-plane>
-
-        <a-entity template="src: #linkButtonsChangeScene" id="buttonback3" data-thumb="#rmarker" data-target="#videosphere"
-                  data-src="../../videos/bedoctor/360SurgeonOneMinute_1136_640.mp4"
-                  data-first="imgButtonback3" data-rotation="0 180 0" data-position="-0.18 0.25 0" data-scene="1"></a-entity>
-    </a-entity>
-
-
-    <a-camera visible="false" active="false" id="player3" position="0 0 0">
-        <a-cursor id="cursor3" visible active color="blue"></a-cursor>
-    </a-camera>
-
-</a-entity>
-
-<a-entity id="Scene_four_parent" active visible position="0 0 0">
-
-    <a-entity id="links4" active visible position="0 0 0">
-        <!-- material="shader: flat; src: #tools;" -->
-        <a-plane id="planeVideo4" scale="8 5 1" material="shader:flat; src:#other360" position="0 1 -6"
-                ></a-plane>
-
-        <a-entity template="src: #linkButtonsChangeScene" id="buttonback4" data-thumb="#rmarker" data-target="#videosphere"
-                  data-src="../../videos/bedoctor/360SurgeonOneMinute_1136_640.mp4"
-                  data-first="imgButtonback4" data-rotation="0 180 0" data-position="-0.18 0.25 0" data-scene="1"></a-entity>
-    </a-entity>
-
-
-    <a-camera visible="false" active="false" id="player4" position="0 0 0">
-        <a-cursor id="cursor4" visible active color="blue"></a-cursor>
-    </a-camera>
-
-</a-entity>
-
 </a-scene>
 
 
@@ -328,9 +254,9 @@
     initScene = function () {
         //custom init
         setVisibleComponent("Scene_one_parent", true);
-        setVisibleComponent("Scene_two_parent", false);
-        setVisibleComponent("Scene_three_parent", false);
-        setVisibleComponent("Scene_four_parent", false);
+        //setVisibleComponent("Scene_two_parent", false);
+        //setVisibleComponent("Scene_three_parent", false);
+        //setVisibleComponent("Scene_four_parent", false);
 
     };
 
