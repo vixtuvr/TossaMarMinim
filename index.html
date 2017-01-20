@@ -78,7 +78,8 @@
     <img id="CookingMuseumIndoorThumb" crossorigin="anonymous" src="../../img/CookingMuseumIndoorThumb.png">
     <img id="DianaChimneyRoomThumb" crossorigin="anonymous" src="../../img/DianaChimneyRoomThumb.png">
     <img id="TossaOctopussyChefMarker" crossorigin="anonymous" src="../../img/TossaOctopussyChefMarker.png">
-    <img id="GranadosRestaurantSkybox" crossorigin="anonymous" src="../../img/GranadosRestaurantSkyBox.png">
+    <img id="GranadosRestaurantSkybox" crossorigin="anonymous" src="../../img/GranadosRestaurantSkyBox_1920_960.png">
+    <img id="DianaChimneyMarker" crossorigin="anonymous" src="../../img/A_Marker_Transp.png">
 
     <!-- VIDEOS -->
 
@@ -170,6 +171,7 @@
 
     </script>
 
+
 </a-assets>
 <!--
 ******************************************************************************************************************************************************************************************
@@ -214,7 +216,10 @@
 
     <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
                    autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+
 </a-entity>
+
 
 <a-entity id="Scene_two_parent" active visible position="0 0 0">
 
@@ -250,13 +255,6 @@
 
 </a-entity>
 
-<a-entity id="Scene_seven_parent" active visible position="0 0 0">
-
-    <a-skybox id="skybox" position ="0.0, 0.0, 0.0" rotation="0.0 -110.0 0.0" active visible src="#GranadosRestaurantSkybox">
-
-    </a-skybox>
-
-</a-entity>
 
 <a-entity id="Scene_four_parent" active visible position="0 0 0">
 
@@ -277,9 +275,9 @@
 
     <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
 
-    <a-entity id="provisional_buttons_scene_five" position="0.75 2.25 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5" active visible>
+    <a-entity id="provisional_buttons_scene_five" position="3.0 2.25 -2.0" rotation="0.0 -20.0 0.0" scale="0.5 0.5 0.5" active visible>
 
-        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonfiveone" data-thumb="#TossaOctopussyChefMarker" data-target="#videosphere"
+        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonfiveone" data-thumb="#DianaChimneyMarker" data-target="#videosphere"
                   data-src="../../videos/tossamar/DianaSolarium.mp4">
         </a-entity>
     </a-entity>
@@ -296,37 +294,39 @@
 
     <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
                    autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+
 </a-entity>
 
-    <!--
-    ******************************************************************************************************************************************************************************************
-            CAMERA
-    /*****************************************************************************************************************************************************************************************
-    -->
-    <a-camera camera active="true" visible="true" position="0 0.5 0" id="player1" collider-check>
-        <a-cursor active visible id="cursor1" color="orange" event-set__1="_event:mouseenter; color: springgreen"
-                  event-set__2="_event: mouseleave; color: orange" raycaster="objects: .link" material="" cursor=""
-                  geometry="" position="" rotation="" scale color="springgreen">
-            <!--
-            <a-animation begin="mouseenter" easing="ease-in" attribute="scale"
-                         fill="backwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
-            <a-animation begin="mouseleave" easing="ease-in" attribute="scale"
-                         fill="backwards" from="0.1 0.1 0.1" to=" 1 1 1"></a-animation>
+<!--
+      ******************************************************************************************************************************************************************************************
+              CAMERA
+      /*****************************************************************************************************************************************************************************************
+      -->
+<a-camera camera active="true" visible="true" position="0 0.5 0" id="player1" collider-check>
+    <a-cursor active visible id="cursor1" color="orange" event-set__1="_event:mouseenter; color: springgreen"
+              event-set__2="_event: mouseleave; color: orange" raycaster="objects: .link" material="" cursor=""
+              geometry="" position="" rotation="" scale color="springgreen">
+        <!--
+        <a-animation begin="mouseenter" easing="ease-in" attribute="scale"
+                     fill="backwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+        <a-animation begin="mouseleave" easing="ease-in" attribute="scale"
+                     fill="backwards" from="0.1 0.1 0.1" to=" 1 1 1"></a-animation>
 
-            <a-animation begin="click" easing="ease-in" attribute="scale"
-                         fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+        <a-animation begin="click" easing="ease-in" attribute="scale"
+                     fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
 
-            <a-animation begin="fusing" easing="ease-in" attribute="scale"
-                         fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-            -->
-        </a-cursor>
-    </a-camera>
-    <!--
-    ******************************************************************************************************************************************************************************************
-            END CAMERA
-    /*****************************************************************************************************************************************************************************************
-    -->
-</a-entity>
+        <a-animation begin="fusing" easing="ease-in" attribute="scale"
+                     fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+        -->
+    </a-cursor>
+</a-camera>
+<!--
+******************************************************************************************************************************************************************************************
+        END CAMERA
+/*****************************************************************************************************************************************************************************************
+-->
+
 
 </a-scene>
 
@@ -360,16 +360,15 @@
 
     initScene = function () {
         //custom init
-        changeTo(GameState.SEVEN);
-        setVisibleComponent("Scene_one_parent", false);
+        changeTo(GameState.ONE);
+        setVisibleComponent("Scene_one_parent", true);
         setVisibleComponent("Scene_two_parent", false);
         setVisibleComponent("Scene_three_parent", false);
         setVisibleComponent("Scene_four_parent", false);
         setVisibleComponent("Scene_five_parent", false);
         setVisibleComponent("Scene_six_parent", false);
-        setVisibleComponent("Scene_seven_parent", true);//SBS scene
+        //setVisibleComponent("Scene_seven_parent", false);//SBS scene
 
-        scaleComponent("Scene_one_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_two_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_three_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_four_parent", 0.0, 0.0, 0.0);
