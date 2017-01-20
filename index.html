@@ -77,21 +77,16 @@
     <img id="SofiaChillOutThumb" crossorigin="anonymous" src="../../img/SofiaChillOutThumb.png">
     <img id="CookingMuseumIndoorThumb" crossorigin="anonymous" src="../../img/CookingMuseumIndoorThumb.png">
     <img id="DianaChimneyRoomThumb" crossorigin="anonymous" src="../../img/DianaChimneyRoomThumb.png">
-    <img id="DianaFountainThumb" crossorigin="anonymous" src="../../img/DianaFountainThumb.png">
     <img id="TossaOctopussyChefMarker" crossorigin="anonymous" src="../../img/TossaOctopussyChefMarker.png">
-
+    <img id="texturechecker" crossorigin="anonymous" src="../../img/test.png">
 
     <!-- VIDEOS -->
-    <!--
-    src: ../../videos/bedoctor/HipVideoUnity.mp4
-    src: ../../videos/bedoctor/Dicom_TimeLapse.mp4
-    src: ../../videos/bedoctor/ZimmerTools.mp4
-    -->
 
     <video id="other360" loop="true" src="../../videos/tossamar/FortressTossaOne.mp4" webkit-playsinline
            controls autobuffer preload="metadata|auto">
     </video>
 
+    <!--NUNJUCKS TEMPLATES-->
 
     <script id="linkTemplate" type="text/nunjucks">
                      <a-entity class="link" rotation="{{rotation}}">
@@ -111,7 +106,7 @@
                      </a-curvedimage>
                     </a-entity>
 
-        </script>
+    </script>
 
     <script id="linkButtons" type="text/nunjucks">
                      <a-entity class="link" rotation="{{rotation}}">
@@ -130,7 +125,7 @@
                      </a-curvedimage>
                     </a-entity>
 
-        </script>
+    </script>
 
     <script id="linkButtonsChangeScene" type="text/nunjucks">
                      <a-entity class="link" rotation="{{rotation}}">
@@ -151,7 +146,7 @@
                      </a-curvedimage>
                     </a-entity>
 
-        </script>
+    </script>
 
 
     <script id="linkButtonsChangeSceneNoRotation" type="text/nunjucks">
@@ -173,8 +168,7 @@
                      </a-curvedimage>
                     </a-entity>
 
-        </script>
-    <!--  set-video="on: click; target: {{target}}; src: {{ src }}" -->
+    </script>
 
 </a-assets>
 <!--
@@ -185,71 +179,116 @@
 
 <!--
 ******************************************************************************************************************************************************************************************
-        BUTTONS
+         PERSISTENT BUTTONS
 /*****************************************************************************************************************************************************************************************
 -->
 
-<!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
+<!-- If the audio of the buttons is emitted from the button, they must be near the listener to be audible-->
 
 <a-entity id="persistentbuttons" position="0 0.75 0"> <!-- layout="layout: line; margin: 1.5" -->
-    <!-- 5 angles 0, -60, -120, -180, -240, -300 -->
+    <!-- 5 angles 0, -72, -144, -216, -288 -->
     <a-entity template="src: #linkButtonsChangeScene" id="btn1" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarLandscape.mp4" data-thumb="#TossaLandscapeThumb"
-              data-first="maphallbutton1" data-rotation="0 0 0" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4"></a-entity>
+              data-first="maphallbutton1" data-rotation="0 0 0" data-scene="1">
+    </a-entity>
+
     <a-entity template="src: #linkButtonsChangeScene" id="btn2" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4" data-thumb="#TossaGhoticChurchMainThumb"
-              data-first="maphallbutton2" data-rotation="0 -60 0"></a-entity>
+              data-first="maphallbutton2" data-rotation="0 -72 0" data-scene="2">
+    </a-entity>
+
     <a-entity template="src: #linkButtonsChangeScene" id="btn3" data-target="#videosphere" data-src="../../videos/tossamar/Granados360.mp4" data-thumb="#SofiaRestaurantThumb"
-              data-first="maphallbutton3" data-rotation="0 -120 0" data-scene="3"></a-entity>
+              data-first="maphallbutton3" data-rotation="0 -144 0" data-scene="3">
+    </a-entity>
+
     <a-entity template="src: #linkButtonsChangeScene" id="btn4" data-target="#videosphere" data-src="../../videos/tossamar/GranadosTerraceOne.mp4" data-thumb="#SofiaChillOutThumb"
-              data-first="maphallbutton4" data-rotation="0 -180 0"></a-entity>
+              data-first="maphallbutton4" data-rotation="0 -216 0" data-scene="4">
+    </a-entity>
+
     <a-entity template="src: #linkButtonsChangeScene" id="btn5" data-target="#videosphere" data-src="../../videos/tossamar/DianaChimney.mp4" data-thumb="#DianaChimneyRoomThumb"
-              data-first="maphallbutton5" data-rotation="0 -240 0"></a-entity>
-    <a-entity template="src: #linkButtonsChangeScene" id="btn6" data-target="#videosphere" data-src="../../videos/tossamar/DianaSolarium.mp4" data-thumb="#DianaFountainThumb"
-              data-first="maphallbutton6" data-rotation="0 -300 0"></a-entity>
-</a-entity>
-
-
-<a-entity id="Scene_one_parent" active visible position="0 0 0">
-    <!--
-    <a-plane id="plane" scale="8 5 1" material="shader: flat; src: #video360;" position="0 1 -6"
-            ></a-plane>
-    -->
-    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
-                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
-</a-entity>
-
-<a-entity id="Scene_three_parent" active visible position="0 0 0">
-    <!--
-    <a-plane id="plane" scale="8 5 1" material="shader: flat; src: #video360;" position="0 1 -6"
-            ></a-plane>
-    -->
-    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
-                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
-
-    <!--
-    ******************************************************************************************************************************************************************************************
-            BUTTONS
-    /*****************************************************************************************************************************************************************************************
-    -->
-
-    <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
-
-    <a-entity id="provisional_buttons_scene_two" position="0.75 2.25 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5" active visible>
-
-        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonone" data-thumb="#TossaOctopussyChefMarker" data-target="#videosphere"
-                  data-src="../../videos/tossamar/GranadosOctopusssySlaughter360.mp4">
-        </a-entity>
+              data-first="maphallbutton5" data-rotation="0 -288 0" data-scene="5">
     </a-entity>
 
 </a-entity>
 
 
+<a-entity id="Scene_one_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+</a-entity>
+
+<a-entity id="Scene_two_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+</a-entity>
+
+<a-entity id="Scene_three_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
 
     <!--
     ******************************************************************************************************************************************************************************************
-        END BUTTONS
+            NON PERSISTENT BUTTONS
     /*****************************************************************************************************************************************************************************************
     -->
 
+    <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
+
+    <a-entity id="provisional_buttons_scene_three" position="0.75 2.25 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5" active visible>
+
+        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonthreeone" data-thumb="#TossaOctopussyChefMarker" data-target="#videosphere"
+                  data-src="../../videos/tossamar/GranadosOctopusssySlaughter360.mp4">
+        </a-entity>
+    </a-entity>
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+        END NON PERSISTENT BUTTONS
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+</a-entity>
+
+<a-entity id="Scene_four_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+</a-entity>
+
+<a-entity id="Scene_five_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+            NON PERSISTENT BUTTONS
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+    <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
+
+    <a-entity id="provisional_buttons_scene_five" position="0.75 2.25 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5" active visible>
+
+        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonfiveone" data-thumb="#TossaOctopussyChefMarker" data-target="#videosphere"
+                  data-src="../../videos/tossamar/DianaSolarium.mp4">
+        </a-entity>
+    </a-entity>
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+        END NON PERSISTENT BUTTONS
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+</a-entity>
+
+<a-entity id="Scene_six_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+</a-entity>
 
     <!--
     ******************************************************************************************************************************************************************************************
@@ -315,11 +354,17 @@
         //custom init
         changeTo(GameState.ONE);
         setVisibleComponent("Scene_one_parent", true);
-        //setVisibleComponent("Scene_two_parent", false);
+        setVisibleComponent("Scene_two_parent", false);
         setVisibleComponent("Scene_three_parent", false);
-        //setVisibleComponent("Scene_four_parent", false);
+        setVisibleComponent("Scene_four_parent", false);
+        setVisibleComponent("Scene_five_parent", false);
+        setVisibleComponent("Scene_six_parent", false);
 
         scaleComponent("Scene_two_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_three_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_four_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_five_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_six_parent", 0.0, 0.0, 0.0);
 
     };
 
