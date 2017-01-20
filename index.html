@@ -198,7 +198,7 @@
     <a-entity template="src: #linkButtonsChangeScene" id="btn2" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4" data-thumb="#TossaGhoticChurchMainThumb"
               data-first="maphallbutton2" data-rotation="0 -60 0"></a-entity>
     <a-entity template="src: #linkButtonsChangeScene" id="btn3" data-target="#videosphere" data-src="../../videos/tossamar/Granados360.mp4" data-thumb="#SofiaRestaurantThumb"
-              data-first="maphallbutton3" data-rotation="0 -120 0" data-scene="2"></a-entity>
+              data-first="maphallbutton3" data-rotation="0 -120 0" data-scene="3"></a-entity>
     <a-entity template="src: #linkButtonsChangeScene" id="btn4" data-target="#videosphere" data-src="../../videos/tossamar/GranadosTerraceOne.mp4" data-thumb="#SofiaChillOutThumb"
               data-first="maphallbutton4" data-rotation="0 -180 0"></a-entity>
     <a-entity template="src: #linkButtonsChangeScene" id="btn5" data-target="#videosphere" data-src="../../videos/tossamar/DianaChimney.mp4" data-thumb="#DianaChimneyRoomThumb"
@@ -217,7 +217,7 @@
                    autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
 </a-entity>
 
-<a-entity id="Scene_two_parent" active visible position="0 0 0">
+<a-entity id="Scene_three_parent" active visible position="0 0 0">
     <!--
     <a-plane id="plane" scale="8 5 1" material="shader: flat; src: #video360;" position="0 1 -6"
             ></a-plane>
@@ -233,7 +233,7 @@
 
     <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
 
-    <a-entity id="provisional_buttons_scene_two" position="0.75 2.25 -2.0" scale="0.5 0.5 0.5" active visible>
+    <a-entity id="provisional_buttons_scene_two" position="0.75 2.25 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5" active visible>
 
         <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonone" data-thumb="#TossaOctopussyChefMarker" data-target="#videosphere"
                   data-src="../../videos/tossamar/GranadosOctopusssySlaughter360.mp4">
@@ -315,8 +315,8 @@
         //custom init
         changeTo(GameState.ONE);
         setVisibleComponent("Scene_one_parent", true);
-        setVisibleComponent("Scene_two_parent", false);
-        //setVisibleComponent("Scene_three_parent", false);
+        //setVisibleComponent("Scene_two_parent", false);
+        setVisibleComponent("Scene_three_parent", false);
         //setVisibleComponent("Scene_four_parent", false);
 
         scaleComponent("Scene_two_parent", 0.0, 0.0, 0.0);
