@@ -78,7 +78,7 @@
     <img id="CookingMuseumIndoorThumb" crossorigin="anonymous" src="../../img/CookingMuseumIndoorThumb.png">
     <img id="DianaChimneyRoomThumb" crossorigin="anonymous" src="../../img/DianaChimneyRoomThumb.png">
     <img id="TossaOctopussyChefMarker" crossorigin="anonymous" src="../../img/TossaOctopussyChefMarker.png">
-    <img id="texturechecker" crossorigin="anonymous" src="../../img/test.png">
+    <img id="GranadosRestaurantSkybox" crossorigin="anonymous" src="../../img/GranadosRestaurantSkyBox.png">
 
     <!-- VIDEOS -->
 
@@ -250,6 +250,14 @@
 
 </a-entity>
 
+<a-entity id="Scene_seven_parent" active visible position="0 0 0">
+
+    <a-skybox id="skybox" position ="0.0, 0.0, 0.0" rotation="0.0 -110.0 0.0" active visible src="#GranadosRestaurantSkybox">
+
+    </a-skybox>
+
+</a-entity>
+
 <a-entity id="Scene_four_parent" active visible position="0 0 0">
 
     <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
@@ -352,19 +360,22 @@
 
     initScene = function () {
         //custom init
-        changeTo(GameState.ONE);
-        setVisibleComponent("Scene_one_parent", true);
+        changeTo(GameState.SEVEN);
+        setVisibleComponent("Scene_one_parent", false);
         setVisibleComponent("Scene_two_parent", false);
         setVisibleComponent("Scene_three_parent", false);
         setVisibleComponent("Scene_four_parent", false);
         setVisibleComponent("Scene_five_parent", false);
         setVisibleComponent("Scene_six_parent", false);
+        setVisibleComponent("Scene_seven_parent", true);//SBS scene
 
+        scaleComponent("Scene_one_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_two_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_three_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_four_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_five_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_six_parent", 0.0, 0.0, 0.0);
+        //scaleComponent("Scene_seven_parent", 0.0, 0.0, 0.0);//SBS scene set scale to 0.0 0.0 0.0
 
     };
 
