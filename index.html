@@ -13,9 +13,11 @@
 
     <!-- <script src="../../lib/vixtuvrEngine.js"></script>-->
 
-    <script type="text/javascript" src="../../lib/miniCore.min.js"></script>
-
     <script type="text/javascript" src="../../lib/kframe.min.js"></script>
+
+    <script type="text/javascript" src="../../require.js"></script>
+
+    <script type="text/javascript" src="../../lib/miniCore.min.js"></script>
 
     <script type="text/javascript" src="../../components/set-video2.min.js"></script>
 
@@ -74,19 +76,19 @@
 
     <audio id="click-sound" src="../../audio/MenuSelect.ogg"></audio>
 
-    <img id="test_img" crossorigin="anonymous" src="../../img/test.png">
+
 
     <!-- MARKERS -->
 
-    <img id="TossaLandscapeThumb" crossorigin="anonymous" src="../../img/TossaLandscapeThumb.png">
-    <img id="TossaGhoticChurchMainThumb" crossorigin="anonymous" src="../../img/TossaGhoticChurchMainThumb.png">
-    <img id="SofiaRestaurantThumb" crossorigin="anonymous" src="../../img/SofiaRestaurantThumb.png">
-    <img id="SofiaChillOutThumb" crossorigin="anonymous" src="../../img/SofiasChillOutThumb.png">
-    <img id="CookingMuseumIndoorThumb" crossorigin="anonymous" src="../../img/CookingMuseumIndoorThumb.png">
-    <img id="DianaChimneyRoomThumb" crossorigin="anonymous" src="../../img/DianaChimneyRoomThumb.png">
-    <img id="TossaOctopussyChefMarker" crossorigin="anonymous" src="../../img/TossaOctopussyChefMarker.png">
+    <img id="TossaLandscapeThumb" crossorigin="anonymous" src="../../img/TossaVistasMurallaThumb.png">
+    <img id="TossaGhoticChurchMainThumb" crossorigin="anonymous" src="../../img/TossaIglesiaVilaVellaThumb.png">
+    <img id="SofiaRestaurantThumb" crossorigin="anonymous" src="../../img/TossaCanSophiaThumb.png">
+    <img id="SofiaChillOutThumb" crossorigin="anonymous" src="../../img/TossaCasaGranadosThumb.png">
+    <img id="DianaChimneyRoomThumb" crossorigin="anonymous" src="../../img/TossaHotelDianaThumb.png">
+    <img id="TossaOctopussyChefMarker" crossorigin="anonymous" src="../../img/PulpoBrasaChefMarker.png">
     <img id="GranadosRestaurantSkybox" crossorigin="anonymous" src="../../img/GranadosRestaurantSkyBox_1920_960.png">
-    <img id="DianaChimneyMarker" crossorigin="anonymous" src="../../img/DianaFountainButtonImage.png">
+    <img id="DianaChimneyMarker" crossorigin="anonymous" src="../../img/TossaSalaModernistaThumb.png">
+
 
     <!-- VIDEOS -->
 
@@ -206,27 +208,27 @@
     <!-- 5 angles 0, -72, -144, -216, -288 -->
     <a-entity template="src: #linkTemplate" id="btn1" data-src="../../videos/tossamar/TossaMarLandscape.mp4"
               data-thumb="#TossaLandscapeThumb"
-              data-first="maphallbutton1" data-rotation="0 0 0">
+              data-first="maphallbutton1" data-rotation="0 0 0" scale="20.0 20.0 20.0">
     </a-entity>
 
     <a-entity template="src: #linkTemplate" id="btn2" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4"
               data-thumb="#TossaGhoticChurchMainThumb"
-              data-first="maphallbutton2" data-rotation="0 -72 0">
+              data-first="maphallbutton2" data-rotation="0 -72 0" scale="20.0 20.0 20.0">
     </a-entity>
 
     <a-entity template="src: #linkButtonsChangeScene" id="btn3" data-target="#videosphereGranados"
               data-src="../../videos/tossamar/Granados360.mp4" data-thumb="#SofiaRestaurantThumb"
-              data-first="maphallbutton3" data-rotation="0 -144 0" data-scene="2">
+              data-first="maphallbutton3" data-rotation="0 -144 0" data-scene="2" scale="20.0 20.0 20.0">
     </a-entity>
 
     <a-entity template="src: #linkTemplate" id="btn4" data-src="../../videos/tossamar/GranadosTerraceOne.mp4"
               data-thumb="#SofiaChillOutThumb"
-              data-first="maphallbutton4" data-rotation="0 -216 0">
+              data-first="maphallbutton4" data-rotation="0 -216 0" scale="20.0 20.0 20.0">
     </a-entity>
 
     <a-entity template="src: #linkButtonsChangeScene" id="btn5" data-target="#videosphereDianaChimney"
               data-src="../../videos/tossamar/DianaChimney.mp4" data-thumb="#DianaChimneyRoomThumb"
-              data-first="maphallbutton5" data-rotation="0 -288 0" data-scene="3">
+              data-first="maphallbutton5" data-rotation="0 -288 0" data-scene="3" scale = "20.0 20.0 20.0">
     </a-entity>
 
 </a-entity>
