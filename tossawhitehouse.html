@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>Android - IPhone Dev</title>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+    <script type="text/javascript" src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+
+    <!-- <script src="../../stereo/examples/build.js"></script>-->
+
+
+    <!-- <script src="../../lib/vixtuvrEngine.js"></script>-->
+
+
+    <script type="text/javascript" src="../../lib/kframe.min.js"></script>
+
+    <script>
+        function changeTo(a){return m_states[a.value]==m_state?void console.log("return"):(null!=m_state?(console.log("state not null"),m_state.leave()):console.log("WARNING state null"),setGameState(a),console.log(m_state),void m_state.enter())}function setGameState(a){m_state=m_states[a.value],currentState=a,onStateChange()}function onStateChange(){}function handleOnStateChange(){console.log("Handling state change to: "+currentState.key)}function initVideos(){var a=document.querySelectorAll("video");console.log(a);for(var b=0;b<a.length;b++)a[b].play(),a[b].pause()}function stopAllVideos(){var a=document.querySelectorAll("video");console.log(a);for(var b=0;b<a.length;b++)a[b].pause()}function videoTool(a){return"undefined"==typeof a?a="#videosphere":a}function restartVideo(a){console.log("restart video");var b=document.querySelector(document.querySelector(videoTool(a)).getAttribute("src"));b.currentTime=0,b.load()}function playVideo(a){console.log("play video");var b=document.querySelector(document.querySelector(videoTool(a)).getAttribute("src"));b.play()}function pauseVideo(a){console.log("pause video");var b=document.querySelector(document.querySelector(videoTool(a)).getAttribute("src"));b.pause(),b=""}function setEnabledVideo(a,b){"undefined"==typeof b&&(b=!1);var c=document.querySelector("#"+a);c.pause(),b&&c.play()}function loadAnotherVideo(a){var b=document.getElementsByTagName("video")[0];b.src!=a&&(b.src=a,b.load())}function checkSrcVideo(a){var b=document.getElementsByTagName("video")[0];return console.log(b.src+"\n"+a),b.src!=a&&!b.src.includes(a.substring(5,a.legnth))}function initCore(){console.log("INIT"),stopAllVideos();var a=document.querySelector("#play-button");a.style.display="block",a.addEventListener("click",function(a){initVideos(),playVideo(),this.style.display="none"},!1);var b=document.querySelector(".a-enter-vr-button");b||console.log("Error : a-enter-vr-button not found"),b.addEventListener("click",function(b){console.log("mouse enter"),document.querySelector("#label-dev").style.display="none",a.style.display="none",initVideos(),playVideo()},!1),initScene(),console.log(m_states[0]),console.log(m_states[0]),onStateChange=handleOnStateChange,setGameState(GameState.ONE)}function updateCore(){}function initScene(){}function debugModeLog(a){"undefined"==typeof a&&(a=!1),console.log=function(){}}function debugModeWarn(a){"undefined"==typeof a&&(a=!1),console.warn=function(){}}function myGameObjectScale(a,b,c,d){for(var e=0;e<a.length;e++)a[e].setAttribute("scale",{x:b,y:c,z:d})}function myGameObjectLog(a){for(var b=0;b<a.length;b++)console.log(a[b].attributes.id)}function myGameObjectVisible(a,b){console.log("change visible "+b+" "+a.length),"undefined"==typeof b&&(b=!1);for(var c=0;c<a.length;c++)a[c].setAttribute("visible",b),a[c].setAttribute("active",b)}function setVisibleComponent(a,b){"undefined"==typeof b&&(b=!1);var c=document.querySelector("#"+a);c.childNodes.forEach(function(a){var c=""+a;c.includes("HTMLElement")&&(a.setAttribute("visible",b),a.setAttribute("active",b))}),c.setAttribute("visible",b),c.setAttribute("active",b)}function scaleComponent(a,b,c,d){var e=document.querySelector("#"+a);e.setAttribute("scale",{x:b,y:c,z:d})}function myGameObjectRotation(a,b,c,d){for(var e=0;e<a.length;e++)a[e].setAttribute("rotation",{x:b,y:c,z:d})}function recenterPoseCameras(a,b,c){for(var d=document.querySelectorAll("a-camera"),e=0;e<d.length;e++)d[e].setAttribute("rotation",{x:a,y:b,z:c})}function setActiveCurrentCamera(){switch(currentState){case GameState.ONE:setActiveCamera("player1");break;case GameState.TWO:setActiveCamera("player2");break;case GameState.THREE:setActiveCamera("player3");break;case GameState.FOUR:setActiveCamera("player4")}}function setActiveCamera(a,b){"undefined"==typeof b&&(b=!0);var c=document.querySelector("#"+a);console.log(a+" active "+c.getAttribute("active")+" visible "+c.getAttribute("visible")),c.setAttribute("active",b),c.setAttribute("visible",b),c.setAttribute("camera","userHeight:1.6;active:"+b),console.log(a+" active "+c.getAttribute("active")+" visible "+c.getAttribute("visible"))}function checkUserAgent(){return/Android/i.test(navigator.userAgent)?(TYPE_AGENT=1,!0):/iPhone|iPad|iPod/i.test(navigator.userAgent)?(TYPE_AGENT=2,!0):/webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)?(TYPE_AGENT=3,!0):(TYPE_AGENT=0,!1)}function changeResolution(){var a=document.getElementById("videoSphere");console.log("Screen resolution: width->"+screen.width+" height->"+screen.height),console.log("Video width->"+a.videoWidth+" Video Height->"+a.videoHeight),a.height=screen.height,a.width=screen.width,console.log("Video width->"+a.width+" Video Height->"+a.height),console.log("Video width->"+a.videoWidth+" Video Height->"+a.videoHeight)}function include(a){var b=document.getElementsByTagName("head")[0],c=document.createElement("script");c.src=a,c.type="text/javascript",b.appendChild(c)}var Interface=function(a,b){if(2!=arguments.length)throw new Error("Interface constructor called with "+arguments.length+"arguments, but expected exactly 2.");this.name=a,this.methods=[];for(var c=0,d=b.length;c<d;c++){if("string"!=typeof b[c])throw new Error("Interface constructor expects method names to be passed in as a string.");this.methods.push(b[c])}};Interface.ensureImplements=function(a){if(arguments.length<2)throw new Error("Function Interface.ensureImplements called with "+arguments.length+"arguments, but expected at least 2.");for(var b=1,c=arguments.length;b<c;b++){var d=arguments[b];if(d.constructor!==Interface)throw new Error("Function Interface.ensureImplements expects argumentstwo and above to be instances of Interface.");for(var e=0,f=d.methods.length;e<f;e++){var g=d.methods[e];if(!a[g]||"function"!=typeof a[g])throw new Error("Function Interface.ensureImplements: object does not implement the "+d.name+" interface. Method "+g+" was not found.")}}};var isDebug=!1;const MY_CONSTANT="value",DISABLE_CTRL=!0;var TYPE_AGENT=0,mainScene=document.querySelector("a-scene"),GameState={ONE:{value:"0",key:"one"},TWO:{value:"1",key:"two"},THREE:{value:"2",key:"three"},FOUR:{value:"3",key:"four"},FIVE:{value:"4",key:"five"},SIX:{value:"5",key:"six"},SEVEN:{value:"6",key:"seven"},EIGHT:{value:"7",key:"eight"},NINE:{value:"8",key:"nine"},TEN:{value:"9",key:"ten"},ELEVEN:{value:"10",key:"eleven"},TWELVE:{value:"11",key:"twelve"},THIRTEEN:{value:"12",key:"thirteen"},FOURTEEN:{value:"13",key:"fourteen"},FIFTEEN:{value:"14",key:"fifteen"}},currentState=GameState.ONE,m_state,IState=new Interface("IState",["enter","leave","pause","resume","update"]),StateOne=function(){this.implements=["IState"],this.enter=function(){setVisibleComponent("Scene_one_parent",!0),scaleComponent("Scene_one_parent",1,1,1),setActiveCurrentCamera(),console.log("state enter")},this.leave=function(){scaleComponent("Scene_one_parent",0,0,0),setVisibleComponent("Scene_one_parent",!1),console.log("state leave")},this.pause=function(){},this.resume=function(){},this.update=function(){}},StateTwo=function(){this.implements=["IState"];var a=function(){};this.enter=function(){setVisibleComponent("Scene_two_parent",!0),scaleComponent("Scene_two_parent",1,1,1),setActiveCurrentCamera(),console.log("state enter")},this.leave=function(){scaleComponent("Scene_two_parent",0,0,0),setVisibleComponent("Scene_two_parent",!1),console.log("state leave")},this.pause=a,this.resume=a,this.update=function(){}},StateThree=function(){this.implements=["IState"];var a=function(){};this.enter=function(){setVisibleComponent("Scene_three_parent",!0),scaleComponent("Scene_three_parent",1,1,1),setActiveCurrentCamera(),console.log("state enter")},this.leave=function(){scaleComponent("Scene_three_parent",0,0,0),setVisibleComponent("Scene_three_parent",!1),console.log("state leave")},this.pause=a,this.resume=a,this.update=function(){}},StateFour=function(){this.implements=["IState"];this.enter=function(){setVisibleComponent("Scene_four_parent",!0),scaleComponent("Scene_four_parent","1.0","1.0","1.0"),setActiveCurrentCamera(),console.log("state enter")},this.leave=function(){scaleComponent("Scene_four_parent",0,0,0),setVisibleComponent("Scene_four_parent",!1),console.log("state leave")}},StateProto=function(a){this.implements=["IState"];this.enter=function(){setVisibleComponent("Scene_"+a+"_parent",!0),scaleComponent("Scene_"+a+"_parent","1.0","1.0","1.0"),setActiveCurrentCamera(),console.log("state enter")},this.leave=function(){scaleComponent("Scene_"+a+"_parent",0,0,0),setVisibleComponent("Scene_"+a+"_parent",!1),console.log("state leave")}},m_states=new Array;m_states[0]=new StateProto(GameState.ONE.key),m_states[1]=new StateProto(GameState.TWO.key),m_states[2]=new StateProto(GameState.THREE.key),m_states[3]=new StateProto(GameState.FOUR.key),m_states[4]=new StateProto(GameState.FIVE.key),m_states[5]=new StateProto(GameState.SIX.key),m_states[6]=new StateProto(GameState.SEVEN.key),m_states[7]=new StateProto(GameState.EIGHT.key),m_states[8]=new StateProto(GameState.NINE.key),m_states[9]=new StateProto(GameState.TEN.key),m_states[10]=new StateProto(GameState.ELEVEN.key),m_states[11]=new StateProto(GameState.TWELVE.key),m_states[12]=new StateProto(GameState.THIRTEEN.key),m_states[13]=new StateProto(GameState.FOURTEEN.key),m_states[14]=new StateProto(GameState.FIFTEEN.key);for(var x=0;x>=m_states.length;x++)Interface.ensureImplements(m_states[x],IState);
+    </script>
+
+    <script>
+        AFRAME.registerComponent("set-video",{schema:{on:{type:"string"},target:{type:"selector"},src:{type:"string"},dur:{type:"number",default:1e3}},multiple:!0,init:function(){console.log("init set-video");var a=this.data,c=(this.data.src,this.el);this.setupFadeAnimation(),c.addEventListener(a.on,function(){if(console.log(!checkSrcVideo(a.src)),null!=a.target.getAttribute("src")){var b=document.querySelector(a.target.getAttribute("src")).src;if(console.log(b),console.log(a.src+" "+b.includes(a.src.substring(5,a.src.lenght))),b.includes(a.src.substring(5,a.src.lenght)))return void console.log("return")}else if(!checkSrcVideo(a.src))return;a.target.emit("set-image-fade"),a.target.components.material.material.map.image.pause(),setTimeout(function(){console.log("set new video"),loadAnotherVideo(a.src),a.target.components.material.material.map.image.play()},a.dur)})},update:function(a){console.log("update set-video")},tick:function(){},setupFadeAnimation:function(){var a=this.data,b=this.data.target;b.dataset.setImageFadeSetup||(b.dataset.setImageFadeSetup=!0,b.setAttribute("animation__fade",{property:"material.color",startEvents:"set-image-fade",dir:"alternate",dur:a.dur,from:"#FFF",to:"#000"}))}});
+
+    </script>
+
+    <script>
+        AFRAME.registerComponent("change-scene",{schema:{on:{type:"string"},src:{type:"string",default:""},dur:{type:"number",default:1e3},scene:{type:"int"}},init:function(){var a=this.data,c=(this.data.src,this.el);c.addEventListener(a.on,function(){setTimeout(function(){switch(console.log(a.scene),a.scene){case 1:changeTo(GameState.ONE);break;case 2:changeTo(GameState.TWO);break;case 3:changeTo(GameState.THREE);break;case 4:changeTo(GameState.FOUR);break;case 5:changeTo(GameState.FIVE);break;case 6:changeTo(GameState.SIX);break;case 7:changeTo(GameState.SEVEN);break;case 8:changeTo(GameState.EIGHT);break;case 9:changeTo(GameState.NINE);break;case 10:changeTo(GameState.TEN);break;case 11:changeTo(GameState.ELEVEN);break;case 12:changeTo(GameState.TWELVE);break;case 13:changeTo(GameState.THIRTEEN);break;case 14:changeTo(GameState.FOURTEEN);break;case 15:changeTo(GameState.FIFTEEN);break;default:changeTo(GameState.ONE)}},a.dur)})}});
+    </script>
+
+    <script>
+        !function(a){function c(d){if(b[d])return b[d].exports;var e=b[d]={exports:{},id:d,loaded:!1};return a[d].call(e.exports,e,e.exports,c),e.loaded=!0,e.exports}var b={};return c.m=a,c.c=b,c.p="",c(0)}([function(a,b,c){!function(){if(!AFRAME)return void console.error("Component attempted to register before AFRAME was available.");var a={stereo:c(1).stereo_component,stereocam:c(1).stereocam_component};Object.keys(a).forEach(function(b){AFRAME.aframeCore?AFRAME.aframeCore.registerComponent(b,a[b]):AFRAME.registerComponent(b,a[b])})}()},function(a,b){a.exports={stereo_component:{schema:{eye:{type:"string",default:"left"},mode:{type:"string",default:"full"},split:{type:"string",default:"horizontal"}},init:function(){console.log("init stereo_component "+this.data.eye),this.video_click_event_added=!1,this.material_is_a_video=!1,console.log(this.el.getAttribute("material").src.tagName+" "+this.data.eye),null!==this.el.getAttribute("material")&&"src"in this.el.getAttribute("material")&&null!==this.el.getAttribute("material").src.src&&"VIDEO"===this.el.getAttribute("material").src.tagName&&(this.material_is_a_video=!0);var a=this.el.object3D.children[0],b=[THREE.SphereGeometry,THREE.SphereBufferGeometry,THREE.BufferGeometry],c=b.some(function(b){return a.geometry instanceof b});if(console.log("is valid geometry "+c+" "+this.data.eye),c&&this.material_is_a_video){if("half"===this.data.mode){console.log("Enter mode HALF");var d=this.el.getAttribute("geometry"),e=new THREE.SphereGeometry(d.radius||100,d.segmentsWidth||64,d.segmentsHeight||64,Math.PI/2,Math.PI,0,Math.PI);console.log(e)}else{console.log("Enter mode FULL");var d=this.el.getAttribute("geometry"),e=new THREE.SphereGeometry(d.radius||100,d.segmentsWidth||64,d.segmentsHeight||64);console.log(e)}var d=this.el.getAttribute("geometry"),e=new THREE.PlaneGeometry(d.radius||1,d.segmentsWidth||64,d.segmentsHeight||64);if(console.log(e),"left"===this.data.eye){console.log("inside eye left");for(var f=e.faceVertexUvs[0],g="vertical"===this.data.split?"y":"x",h=0;h<f.length;h++)for(var i=0;i<3;i++)"x"==g?f[h][i][g]*=.5:(f[h][i][g]*=.5,f[h][i][g]+=.5);console.log(f)}if("right"===this.data.eye){var f=e.faceVertexUvs[0],g="vertical"===this.data.split?"y":"x";console.log("config eye "+this.data.eye);for(var h=0;h<f.length;h++)for(var i=0;i<3;i++)"x"==g?(f[h][i][g]*=.5,f[h][i][g]+=.5):f[h][i][g]*=.5}a.geometry=(new THREE.BufferGeometry).fromGeometry(e)}},update:function(a){console.log("UPDATE stereo_component "+this.data.eye);var b=this.el.object3D.children[0],c=this.data;"both"===c.eye?b.layers.set(0):b.layers.set("left"===c.eye?1:2)},tick:function(a){}},stereocam_component:{schema:{eye:{type:"string",default:"left"}},init:function(){console.log("init stereocam_component "+this.data.eye),this.layer_changed=!1},tick:function(a){var b=this.data;if(!this.layer_changed){var c=[];this.el.object3D.children.forEach(function(a,b,d){c[b]=a.type});var d=c.indexOf("PerspectiveCamera"),e=this.el.object3D.children[d];"both"===b.eye?(e.layers.enable(1),e.layers.enable(2)):e.layers.enable("left"===b.eye?1:2)}}}}}]);
+    </script>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,100,600">
+    <link rel="stylesheet" href="../../normalize.css">
+    <link rel="stylesheet" href="../../skeleton.css">
+
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="">
+    <!--apple-touch-icon-precomposed.png-->
+    <link rel="shortcut icon" href="">
+    <!-- favicon.ico -->
+    <script type="text/javascript">
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-90430248-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+</head>
+
+<body>
+<div id="header">
+    <div id="headerContent">
+        <button id="play-button">Begin Your Experience</button>
+        <b id="label-dev">Developer Version</b>
+    </div>
+</div>
+
+
+<a-scene class="fullscreen" canvas="" debug="true" stats="true"
+         inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js"
+         keyboard-shortcuts="" screenshot="" vr-mode-ui="">
+
+<!--
+******************************************************************************************************************************************************************************************
+    ASSETS
+/*****************************************************************************************************************************************************************************************
+-->
+<a-assets timeout="3000">
+
+    <audio id="click-sound" src="../../audio/MenuSelect.ogg"></audio>
+
+    <img id="test_img" crossorigin="anonymous" src="../../img/test.png">
+
+    <!-- MARKERS -->
+
+    <img id="WhiteHouseGeneralView" crossorigin="anonymous" src="../../img/Casa_Blanca_General_View_Thumb.png">
+    <img id="WhiteHouseUpperLevel" crossorigin="anonymous" src="../../img/Casa_Blanca_Upper_Level_Thumb.png">
+    <img id="WhiteHouseMiddleLevel" crossorigin="anonymous" src="../../img/Casa_Blanca_Middle_Level_Thumb.png">
+    <img id="WhiteHouseGameRoom" crossorigin="anonymous" src="../../img/Casa_Blanca_Game_Room_Thumb.png">
+
+    <!-- VIDEOS -->
+
+    <video id="other360" loop="true" src="../../videos/tossamar/Casa_Blanca_Tossa_Game_Room-Apple Devices 4K.m4v" webkit-playsinline
+           controls autobuffer preload="metadata|auto">
+    </video>
+
+    <!--NUNJUCKS TEMPLATES-->
+
+    <script id="linkTemplate" type="text/nunjucks">
+                     <a-entity class="link" rotation="{{rotation}}">
+                        <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
+                            radius="5.7" theta-length="34" height=".85" rotation="{{rotchild}}" position="{{position}}"
+                            scale=".4 .4 .4"  opacity=".8"
+                            event-set__1="_event: mousedown; scale: 0.4 0.4 0.4"
+                            event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
+                            event-set__3="_event: mouseenter; scale: 0.41 0.41 0.41"
+                            event-set__4="_event: mouseleave; scale: 0.4 0.4 0.4"
+
+                            set-video="on: click; target: #videosphere; src: {{ src }}"
+
+                            sound="on: click; src: #click-sound"
+                            >
+                            <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+                     </a-curvedimage>
+                    </a-entity>
+
+    </script>
+
+    <script id="linkButtons" type="text/nunjucks">
+                     <a-entity class="link" rotation="{{rotation}}">
+                        <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
+                            radius="5.7" theta-length="10" height=".85" rotation="{{rotchild}}" position="{{position}}"
+                            scale=".4 .4 .4"  opacity=".8"
+                            event-set__1="_event: mousedown; scale: 0.4 0.4 0.4"
+                            event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
+                            event-set__3="_event: mouseenter; scale: 0.41 0.41 0.41"
+                            event-set__4="_event: mouseleave; scale: 0.4 0.4 0.4"
+
+                            set-video="on: click; target: #videosphere; src: {{ src }}"
+
+                            sound="on: click; src: #click-sound"
+                            >
+                     </a-curvedimage>
+                    </a-entity>
+
+    </script>
+
+    <script id="linkButtonsChangeScene" type="text/nunjucks">
+                     <a-entity class="link" rotation="{{rotation}}">
+                        <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
+                            radius="5.7" theta-length="10" height=".85" rotation="{{rotchild}}" position="{{position}}"
+                            scale=".4 .4 .4"  opacity=".8"
+                            event-set__1="_event: mousedown; scale: 0.4 0.4 0.4"
+                            event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
+                            event-set__3="_event: mouseenter; scale: 0.41 0.41 0.41"
+                            event-set__4="_event: mouseleave; scale: 0.4 0.4 0.4"
+                            change-scene="on : click; scene: {{scene}}"
+
+
+                            set-video="on: click; target: {{target}}; src: {{ src }}"
+                            sound="on: click; src: #click-sound"
+                            >
+                            <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="100000" repeat="infinite" easing="linear"></a-animation>
+                     </a-curvedimage>
+                    </a-entity>
+
+    </script>
+
+
+    <script id="linkButtonsChangeSceneNoRotation" type="text/nunjucks">
+                     <a-entity class="link">
+                        <a-plane material="shader: flat; src: {{ thumb }}"
+                            height="1" width = "1"
+                            scale="1.0 1.0 1.0"  opacity="0.8"
+                            event-set__1="_event: mousedown; scale: 1.0 1.0 1.0"
+                            event-set__2="_event: mouseup; scale: 1.2 1.2 1.2"
+                            event-set__3="_event: mouseenter; scale: 1.2 1.2 1.2"
+                            event-set__4="_event: mouseleave; scale: 1.0 1.0 1.0"
+                            change-scene="on : click; scene: {{scene}}"
+
+
+                            set-video="on: click; target: {{target}}; src: {{ src }}"
+                            sound="on: click; src: #click-sound"
+                            >
+
+                     </a-curvedimage>
+                    </a-entity>
+
+    </script>
+
+
+</a-assets>
+<!--
+******************************************************************************************************************************************************************************************
+    END ASSETS
+/*****************************************************************************************************************************************************************************************
+-->
+
+<!--
+******************************************************************************************************************************************************************************************
+         PERSISTENT BUTTONS
+/*****************************************************************************************************************************************************************************************
+-->
+
+<!-- If the audio of the buttons is emitted from the button, they must be near the listener to be audible-->
+
+<a-entity id="persistentbuttons" position="0 0.75 0"> <!-- layout="layout: line; margin: 1.5" -->
+    <!-- 5 angles 0, -72, -144, -216, -288 -->
+    <a-entity template="src: #linkButtonsChangeScene" id="btn1" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarLandscape.mp4" data-thumb="#TossaLandscapeThumb"
+              data-first="maphallbutton1" data-rotation="0 0 0" data-scene="1">
+    </a-entity>
+
+    <a-entity template="src: #linkButtonsChangeScene" id="btn2" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4" data-thumb="#TossaGhoticChurchMainThumb"
+              data-first="maphallbutton2" data-rotation="0 -72 0" data-scene="2">
+    </a-entity>
+
+    <a-entity template="src: #linkButtonsChangeScene" id="btn3" data-target="#videosphere" data-src="../../videos/tossamar/Granados360.mp4" data-thumb="#SofiaRestaurantThumb"
+              data-first="maphallbutton3" data-rotation="0 -144 0" data-scene="3">
+    </a-entity>
+
+    <a-entity template="src: #linkButtonsChangeScene" id="btn4" data-target="#videosphere" data-src="../../videos/tossamar/GranadosTerraceOne.mp4" data-thumb="#SofiaChillOutThumb"
+              data-first="maphallbutton4" data-rotation="0 -216 0" data-scene="4">
+    </a-entity>
+
+    <a-entity template="src: #linkButtonsChangeScene" id="btn5" data-target="#videosphere" data-src="../../videos/tossamar/DianaChimney.mp4" data-thumb="#DianaChimneyRoomThumb"
+              data-first="maphallbutton5" data-rotation="0 -288 0" data-scene="5">
+    </a-entity>
+
+</a-entity>
+
+
+<a-entity id="Scene_one_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+
+</a-entity>
+
+
+<a-entity id="Scene_two_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+</a-entity>
+
+<a-entity id="Scene_three_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+            NON PERSISTENT BUTTONS
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+    <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
+
+    <a-entity id="provisional_buttons_scene_three" position="0.75 2.25 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5" active visible>
+
+        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonthreeone" data-thumb="#TossaOctopussyChefMarker" data-target="#videosphere"
+                  data-src="../../videos/tossamar/GranadosOctopusssySlaughter360.mp4">
+        </a-entity>
+    </a-entity>
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+        END NON PERSISTENT BUTTONS
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+</a-entity>
+
+
+<a-entity id="Scene_four_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+</a-entity>
+
+<a-entity id="Scene_five_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+            NON PERSISTENT BUTTONS
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+    <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
+
+    <a-entity id="provisional_buttons_scene_five" position="3.0 2.25 -2.0" rotation="0.0 -20.0 0.0" scale="0.5 0.5 0.5" active visible>
+
+        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonfiveone" data-thumb="#DianaChimneyMarker" data-target="#videosphere"
+                  data-src="../../videos/tossamar/DianaSolarium.mp4">
+        </a-entity>
+    </a-entity>
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+        END NON PERSISTENT BUTTONS
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+</a-entity>
+
+<a-entity id="Scene_six_parent" active visible position="0 0 0">
+
+    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+
+</a-entity>
+
+<!--
+      ******************************************************************************************************************************************************************************************
+              CAMERA
+      /*****************************************************************************************************************************************************************************************
+      -->
+<a-camera camera active="true" visible="true" position="0 0.5 0" id="player1" collider-check>
+    <a-cursor active visible id="cursor1" color="orange" event-set__1="_event:mouseenter; color: springgreen"
+              event-set__2="_event: mouseleave; color: orange" raycaster="objects: .link" material="" cursor=""
+              geometry="" position="" rotation="" scale color="springgreen">
+        <!--
+        <a-animation begin="mouseenter" easing="ease-in" attribute="scale"
+                     fill="backwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
+        <a-animation begin="mouseleave" easing="ease-in" attribute="scale"
+                     fill="backwards" from="0.1 0.1 0.1" to=" 1 1 1"></a-animation>
+
+        <a-animation begin="click" easing="ease-in" attribute="scale"
+                     fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+
+        <a-animation begin="fusing" easing="ease-in" attribute="scale"
+                     fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
+        -->
+    </a-cursor>
+</a-camera>
+<!--
+******************************************************************************************************************************************************************************************
+        END CAMERA
+/*****************************************************************************************************************************************************************************************
+-->
+
+
+</a-scene>
+
+
+<div id="footer">
+    <div id="footerContent">
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var scene = document.querySelector("a-scene");
+    var videos = document.getElementsByTagName("video");
+
+    console.log("is mobile: " + checkUserAgent() + " " + TYPE_AGENT);
+
+    if (scene.hasLoaded) {
+        console.log("LOADED");
+        initCore();
+        //myGameObjectVisible(document.querySelector("#tempvideosphere"),false);
+
+    } else {
+        console.log("not loaded");
+        document.querySelector("#play-button").style.display = "none";
+        scene.addEventListener('loaded', initCore);
+
+        //setVisibleComponent("tempvideosphere");
+    }
+
+    initScene = function () {
+
+
+        //custom init
+        changeTo(GameState.ONE);
+        setVisibleComponent("Scene_one_parent", true);
+        setVisibleComponent("Scene_two_parent", false);
+        setVisibleComponent("Scene_three_parent", false);
+        setVisibleComponent("Scene_four_parent", false);
+        setVisibleComponent("Scene_five_parent", false);
+        setVisibleComponent("Scene_six_parent", false);
+        //setVisibleComponent("Scene_seven_parent", false);//SBS scene
+
+        scaleComponent("Scene_two_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_three_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_four_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_five_parent", 0.0, 0.0, 0.0);
+        scaleComponent("Scene_six_parent", 0.0, 0.0, 0.0);
+        //scaleComponent("Scene_seven_parent", 0.0, 0.0, 0.0);//SBS scene set scale to 0.0 0.0 0.0
+
+    };
+
+</script>
+
+</body>
+</html>
