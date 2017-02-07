@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="apple-mobile-web-app-capable" content="yes"/>
+    <title>Android - IPhone Dev</title>
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/nunjucks/2.3.0/nunjucks.min.js"></script>
+    <script type="text/javascript" src="https://aframe.io/releases/0.4.0/aframe.min.js"></script>
+
+
+    <script type="text/javascript" src="../../lib/kframe.min.js"></script>
+    <script type="text/javascript" src="../../lib/require.js"></script>
+
+    <!--in core is core and vixtu-components javascript-->
+    <script src="../../lib/core.min.js"></script>
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,100,600">
+    <link rel="stylesheet" href="../../normalize.css">
+    <link rel="stylesheet" href="../../skeleton.css">
+
+
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="">
+    <!--apple-touch-icon-precomposed.png-->
+    <link rel="shortcut icon" href="">
+    <!-- favicon.ico -->
+
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-90430248-1', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+
+</head>
+
+<body>
+<div id="header">
+    <div id="headerContent">
+        <button id="play-button">Begin Your Experience</button>
+        <b id="label-dev">Developer Version</b>
+    </div>
+</div>
+
+
+<a-scene class="fullscreen" canvas="" debug="true" stats="true"
+         inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js"
+         keyboard-shortcuts="" screenshot="" vr-mode-ui="">
+
+    <!--
+******************************************************************************************************************************************************************************************
+        ASSETS
+/*****************************************************************************************************************************************************************************************
+-->
+    <a-assets timeout="10000">
+
+        <audio id="click-sound" src="../../audio/MenuSelect.ogg"></audio>
+
+        <img id="CasaBlancaGeneralView" crossorigin="anonymous" src="../../img/Casa_Blanca_General_View_Thumb.png">
+        <img id="CasaBlancaUpperLevel" crossorigin="anonymous" src="../../img/Casa_Blanca_Upper_Level_Thumb.png">
+        <img id="CasaBlancaMiddleLevel" crossorigin="anonymous" src="../../img/Casa_Blanca_Middle_Level_Thumb.png">
+        <img id="CasaBlancaGameRoom" crossorigin="anonymous" src="../../img/Casa_Blanca_Game_Room_Thumb.png">
+
+
+        <!-- VIDEOS -->
+
+        <video id="other360" loop="true" src="../../videos/WhiteHouse/Test/WH_General_View_3840_1920_h264_android.mp4" webkit-playsinline controls autobuffer preload="metadata|auto">
+        </video>
+
+
+        <script id="linkTemplate" type="text/nunjucks">
+                     <a-entity class="link" rotation="{{rotation}}">
+                        <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
+                            radius="5.7" theta-length="20" height="1.5" rotation="{{rotchild}}" position="{{position}}"
+                            scale="1.0 1.0 1.0"  opacity="1.0"
+                            event-set__1="_event: mousedown; scale: 1.0 1.0 1.0"
+                            event-set__2="_event: mouseup; scale: 1.1 1.1 1.1"
+                            event-set__3="_event: mouseenter; scale: 1.1 1.1 1.1"
+                            event-set__4="_event: mouseleave; scale: 1.0 1.0 1.0"
+
+                            setvideo="on: click; target: {{target}}; src: {{ src }}; src2: {{src2}}; src3: {{src3}}"
+
+                            sound="on: click; src: #click-sound"
+                            >
+                            <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+                     </a-curvedimage>
+                    </a-entity>
+        </script>
+
+        <script id="linkButtons" type="text/nunjucks">
+                     <a-entity class="link" rotation="{{rotation}}">
+                        <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
+                            radius="5.7" theta-length="10" height=".85" rotation="{{rotchild}}" position="{{position}}"
+                            scale=".4 .4 .4"  opacity="1.0"
+                            event-set__1="_event: mousedown; scale: 0.4 0.4 0.4"
+                            event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
+                            event-set__3="_event: mouseenter; scale: 0.41 0.41 0.41"
+                            event-set__4="_event: mouseleave; scale: 0.4 0.4 0.4"
+
+                            setvideo="on: click; target: #videosphere; src: {{ src }}"
+
+                            sound="on: click; src: #click-sound"
+                            >
+                     </a-curvedimage>
+                    </a-entity>
+        </script>
+
+
+    </a-assets>
+    <!--
+    ******************************************************************************************************************************************************************************************
+        END ASSETS
+    /*****************************************************************************************************************************************************************************************
+    -->
+    <a-sky id="sky" opacity= "0" color = "black" radius = "1" position ="0.0 2.0 0.0"></a-sky>
+    <a-entity id="Scene_one_parent" active visible position="0 0 0">
+
+
+        <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+                       autoplay="false"></a-videosphere>
+
+
+        <!--
+        ******************************************************************************************************************************************************************************************
+                BUTTONS
+        /*****************************************************************************************************************************************************************************************
+        -->
+        <a-entity id="buttons_scene_one" position="0 0.5 0" active visible>
+
+
+            <a-entity id="links3" position="0 -1.5 0"> <!-- layout="layout: line; margin: 1.5" -->
+                <!-- 8 angles 0, -40, -80, -120, -160, -200, -240, -280, -320 -->
+                <a-entity template="src: #linkTemplate" id="btn1"
+                          data-src="../../videos/WhiteHouse/Test/WH_General_View_3840_1920_h264_android.mp4"
+                          data-src2="../../videos/WhiteHouse/Test/WH_General_View_3840_1920_h264_android.mp4"
+                          data-src3="../../videos/WhiteHouse/Test/WH_General_View_3840_1920_h264_android.mp4"
+                          data-thumb="#CasaBlancaGeneralView"
+                          data-first="maphallbutton1" data-rotation="0 0 0" data-target = "#videosphere"></a-entity>
+                <a-entity template="src: #linkTemplate" id="btn2"
+                          data-src="../../videos/WhiteHouse/Test/WH_Upper_Level_3840_1920_h264_android.mp4"
+                          data-src2="../../videos/WhiteHouse/Test/WH_Upper_Level_3840_1920_h264_android.mp4"
+                          data-src3="../../videos/WhiteHouse/Test/WH_Upper_Level_3840_1920_h264_android.mp4"
+                          data-thumb="#CasaBlancaUpperLevel"
+                          data-first="maphallbutton2" data-rotation="0 90 0" data-target = "#videosphere"></a-entity>
+                <a-entity template="src: #linkTemplate" id="btn3"
+                          data-src="../../videos/WhiteHouse/Test/WH_Middle_Level_3840_1920_h264_android.mp4"
+                          data-src2="../../videos/WhiteHouse/Test/WH_Middle_Level_3840_1920_h264_android.mp4"
+                          data-src3="../../videos/WhiteHouse/Test/WH_Middle_Level_3840_1920_h264_android.mp4"
+                          data-thumb="#CasaBlancaMiddleLevel"
+                          data-first="maphallbutton3" data-rotation="0 180 0" data-target = "#videosphere"></a-entity>
+                <a-entity template="src: #linkTemplate" id="btn4"
+                          data-src="../../videos/WhiteHouse/Test/WH_Game_Room_3840_1920_h264_android.mp4"
+                          data-src2="../../videos/WhiteHouse/Test/WH_Game_Room_3840_1920_h264_android.mp4"
+                          data-src3="../../videos/WhiteHouse/Test/WH_Game_Room_3840_1920_h264_android.mp4"
+                          data-thumb="#CasaBlancaGameRoom"
+                          data-first="maphallbutton4" data-rotation="0 270 0" data-target = "#videosphere"></a-entity>
+            </a-entity>
+
+        </a-entity>
+
+        <!--
+        ******************************************************************************************************************************************************************************************
+            END BUTTONS
+        /*****************************************************************************************************************************************************************************************
+        -->
+    </a-entity>
+
+
+    <!--
+    ******************************************************************************************************************************************************************************************
+            CAMERA
+    /*****************************************************************************************************************************************************************************************
+    -->
+    <a-camera active="true" visible="true" position="0 0.5 0" id="player" collider-check>
+        <a-cursor active visible id="cursor1" event-set__1="_event:mouseenter; color: springgreen"
+                  event-set__2="_event: mouseleave; color: orange" raycaster="objects: .link" material="" cursor=""
+                  geometry="" position="" rotation="" scale color="orange">
+
+        </a-cursor>
+    </a-camera>
+    <!--
+    ******************************************************************************************************************************************************************************************
+            END CAMERA
+    /*****************************************************************************************************************************************************************************************
+    -->
+
+
+
+</a-scene>
+
+
+<div id="footer">
+    <div id="footerContent">
+
+    </div>
+</div>
+
+
+<script type="text/javascript">
+
+    var scene = document.querySelector("a-scene");
+    var videos = document.getElementsByTagName("video");
+    var sky = document.querySelector("a-sky");
+
+    var threeScene;//Reference to the underlying three scene
+    var aframeCamera;//Reference to the AFrame camera
+    var aframeRenderer;//Reference to the AFrame renderer
+
+
+    console.log("is mobile: "+checkUserAgent() + " "+TYPE_AGENT);
+
+    if (scene.hasLoaded)
+    {
+        console.log("LOADED");
+        previousInit();
+        initCore();
+        //myGameObjectVisible(document.querySelector("#tempvideosphere"),false);
+
+    }
+    else
+    {
+        console.log("not loaded");
+        previousInit();
+        scene.addEventListener('loaded', initCore);
+    }
+
+    initScene = function()
+    {
+
+        //Register GameStates
+        registerState(GameState.ONE);
+        //Function to get references to objects of interest
+        getReferences();
+        //Draw components
+        setVisibleComponent("Scene_one_parent", true);
+
+        setTimeout(function()
+        {
+            sky.setAttribute("opacity", 0);
+            sky.setAttribute("visible", false);
+        }, 1000);
+
+        loadSrcVideoByResolution(
+                "../../videos/Witehouse/Test/WH_General_View_3840_1920_h264_android.mp4",
+                "../../videos/WhiteHouse/Test/WH_General_View_3840_1920_h264_android.mp4",
+                "../../videos/WhiteHouse/Test/WH_General_View_3840_1920_h264_android.mp4");
+    };
+
+
+    function previousInit()
+    {
+        document.querySelector("#play-button").style.display = "none";
+        sky.setAttribute("opacity", 1);
+        checkScreenSize();
+        logBrowsers();
+    }
+
+    setActiveCurrentCamera = function(){};
+
+    function getReferences()
+    {
+        threeScene = scene.object3D;//reference to the underlying THREE scene
+        aframeCamera = document.getElementById("player");//reference to the AFrame camera
+        threeCamera = aframeCamera.object3D;//reference to the underlying three camera
+        aframeRenderer = scene.renderer;//reference to the AFrame renderer
+    }
+
+</script>
+
+</body>
+</html>

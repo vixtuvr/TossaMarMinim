@@ -381,15 +381,14 @@
 
         //custom init
         //Register GameStates
+
+
         registerState(GameState.ONE);
         registerState(GameState.TWO);
         registerState(GameState.THREE);
         registerState(GameState.FOUR);
 
         myFunction = onStateChange();
-
-        console.log(myFunction);
-
 
         setVisibleComponent("Scene_one_parent", true);
         setVisibleComponent("Scene_two_parent", false);
@@ -413,7 +412,10 @@
 
     handleOnStateChange = function(){
         console.log("Handle camera");
+        console.log("Entering handleOnStateChange");
         setActiveCurrentCamera();
+
+        //recenterPoseCameras(0.0, 0.0, 0.0);//To recenter pose the camera?????????TEST!!!!!!!!!!!
 
         if(currentState == GameState.FOUR)
         {
