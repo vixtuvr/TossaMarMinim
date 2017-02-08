@@ -13,15 +13,17 @@
 
     <!-- <script src="../../lib/vixtuvrEngine.js"></script>-->
 
-    <script type="text/javascript" src="../../lib/miniCore.min.js"></script>
 
-    <script type="text/javascript" src="../../lib/kframe.min.js"></script>
+    <script src="../../lib/kframe.min.js"></script>
+    <script src="../../lib/require.js"></script>
 
-    <script type="text/javascript" src="../../components/set-video2.min.js"></script>
+    <script src="../../lib/miniCore.min.js"></script>
 
-    <script type="text/javascript" src="../../components/change-scene2.min.js"></script>
+    <script src="../../components/set-video2.min.js"></script>
 
-    <script type="text/javascript" src="../../components/aframe-stereo-component.min.js"></script>
+    <script src="../../components/change-scene2.min.js"></script>
+
+    <script src="../../components/aframe-stereo-component.min.js"></script>
 
     <!-- CSS -->
     <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Raleway:400,300,100,600">
@@ -34,10 +36,17 @@
     <link rel="shortcut icon" href="">
     <!-- favicon.ico -->
     <script type="text/javascript">
-        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-            (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                (i[r].q = i[r].q || []).push(arguments)
+            }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                    m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
         ga('create', 'UA-90430248-1', 'auto');
         ga('send', 'pageview');
@@ -49,12 +58,12 @@
 <div id="header">
     <div id="headerContent">
         <button id="play-button">Begin Your Experience</button>
-        <b id="label-dev">Developer Version</b>
+        <b id="label-dev">Demo Version</b>
     </div>
 </div>
 
 
-<a-scene class="fullscreen" canvas="" debug="true" stats="true"
+<a-scene class="fullscreen" canvas="" debug="true" stats="false"
          inspector="url: https://aframe.io/releases/0.3.0/aframe-inspector.min.js"
          keyboard-shortcuts="" screenshot="" vr-mode-ui="">
 
@@ -71,16 +80,16 @@
 
     <!-- MARKERS -->
 
-    <img id="TossaLandscapeThumb" crossorigin="anonymous" src="../../img/TossaLandscapeThumb.png">
-    <img id="TossaGhoticChurchMainThumb" crossorigin="anonymous" src="../../img/TossaGhoticChurchMainThumb.png">
-    <img id="SofiaRestaurantThumb" crossorigin="anonymous" src="../../img/SofiaRestaurantThumb.png">
-    <img id="SofiaChillOutThumb" crossorigin="anonymous" src="../../img/SofiaChillOutThumb.png">
-    <img id="CookingMuseumIndoorThumb" crossorigin="anonymous" src="../../img/CookingMuseumIndoorThumb.png">
-    <img id="DianaChimneyRoomThumb" crossorigin="anonymous" src="../../img/DianaChimneyRoomThumb.png">
-    <img id="TossaOctopussyChefMarker" crossorigin="anonymous" src="../../img/TossaOctopussyChefMarker.png">
+    <img id="TossaLandscapeThumb" crossorigin="anonymous" src="../../img/TossaCasaGranadosThumb.png">
+    <img id="TossaGhoticChurchMainThumb" crossorigin="anonymous" src="../../img/TossaIglesiaVilaVellaThumb.png">
+    <img id="SofiaRestaurantThumb" crossorigin="anonymous" src="../../img/TossaCanSophiaThumb.png">
+    <img id="SofiaChillOutThumb" crossorigin="anonymous" src="../../img/TossaCasaGranadosThumb.png">
+    <img id="DianaChimneyRoomThumb" crossorigin="anonymous" src="../../img/TossaHotelDianaThumb.png">
+    <img id="TossaOctopussyChefMarker" crossorigin="anonymous" src="../../img/PulpoBrasaChefMarker.png">
+    <img id="DianaChimneyMarker" crossorigin="anonymous" src="../../img/TossaSalaModernistaThumb.png">
     <img id="GranadosRestaurantSkybox" crossorigin="anonymous" src="../../img/GranadosRestaurantSkyBox_1920_960.png">
-    <img id="DianaChimneyMarker" crossorigin="anonymous" src="../../img/A_Marker_Transp.png">
-
+    <!-- BACK MARKER -->
+    <img id="rmarker" crossorigin="anonymous" src="../../img/R_Marker_Transp.png">
     <!-- VIDEOS -->
 
     <video id="other360" loop="true" src="../../videos/tossamar/FortressTossaOne.mp4" webkit-playsinline
@@ -92,7 +101,7 @@
     <script id="linkTemplate" type="text/nunjucks">
                      <a-entity class="link" rotation="{{rotation}}">
                         <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
-                            radius="5.7" theta-length="34" height=".85" rotation="{{rotchild}}" position="{{position}}"
+                            radius="5.7" theta-length="10" height=".85" rotation="{{rotchild}}" position="{{position}}"
                             scale=".4 .4 .4"  opacity=".8"
                             event-set__1="_event: mousedown; scale: 0.4 0.4 0.4"
                             event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
@@ -103,9 +112,11 @@
 
                             sound="on: click; src: #click-sound"
                             >
-                            <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="160000" repeat="infinite" easing="linear"></a-animation>
+                            <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="100000" repeat="infinite" easing="linear"></a-animation>
                      </a-curvedimage>
                     </a-entity>
+
+
 
     </script>
 
@@ -118,7 +129,7 @@
                             event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
                             event-set__3="_event: mouseenter; scale: 0.41 0.41 0.41"
                             event-set__4="_event: mouseleave; scale: 0.4 0.4 0.4"
-
+                            change-scene="on : click; scene: 1"
                             set-video="on: click; target: #videosphere; src: {{ src }}"
 
                             sound="on: click; src: #click-sound"
@@ -126,12 +137,14 @@
                      </a-curvedimage>
                     </a-entity>
 
+
+
     </script>
 
     <script id="linkButtonsChangeScene" type="text/nunjucks">
                      <a-entity class="link" rotation="{{rotation}}">
                         <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
-                            radius="5.7" theta-length="10" height=".85" rotation="{{rotchild}}" position="{{position}}"
+                            radius="5.7" theta-length="20" height="1.5" rotation="{{rotchild}}" position="{{position}}"
                             scale=".4 .4 .4"  opacity=".8"
                             event-set__1="_event: mousedown; scale: 0.4 0.4 0.4"
                             event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
@@ -143,9 +156,11 @@
                             set-video="on: click; target: {{target}}; src: {{ src }}"
                             sound="on: click; src: #click-sound"
                             >
-                            <a-animation attribute="rotation" from="0 0 0" to="0 -360 0" begin="0" dur="100000" repeat="infinite" easing="linear"></a-animation>
+                            <a-animation attribute="rotation" from="15 0 0" to="15 -360 0" begin="0" dur="100000" repeat="infinite" easing="linear"></a-animation>
                      </a-curvedimage>
                     </a-entity>
+
+
 
     </script>
 
@@ -169,7 +184,29 @@
                      </a-curvedimage>
                     </a-entity>
 
+
+
     </script>
+
+    <script id="linkButtonsChangeSceneFull" type="text/nunjucks">
+                     <a-entity class="link" rotation="{{rotation}}">
+                        <a-curvedimage id="{{first}}"  material="shader: flat; src: {{ thumb }}"
+                            radius="5.7" theta-length="10" height=".85" rotation="{{rotchild}}" position="{{position}}"
+                            scale=".4 .4 .4"  opacity=".8"
+                            event-set__1="_event: mousedown; scale: 0.4 0.4 0.4"
+                            event-set__2="_event: mouseup; scale: 0.41 0.41 0.41"
+                            event-set__3="_event: mouseenter; scale: 0.41 0.41 0.41"
+                            event-set__4="_event: mouseleave; scale: 0.4 0.4 0.4"
+                            change-scene="on : click; scene: {{scene}}"
+
+
+                            set-video="on: click; target: {{target}}; src: {{ src }}"
+                            sound="on: click; src: #click-sound"
+                            >
+                     </a-curvedimage>
+                    </a-entity>
+
+        </script>
 
 
 </a-assets>
@@ -187,146 +224,127 @@
 
 <!-- If the audio of the buttons is emitted from the button, they must be near the listener to be audible-->
 
-<a-entity id="persistentbuttons" position="0 0.75 0"> <!-- layout="layout: line; margin: 1.5" -->
+<a-entity id="persistentbuttons" position="0 0 0"> <!-- layout="layout: line; margin: 1.5" -->
     <!-- 5 angles 0, -72, -144, -216, -288 -->
-    <a-entity template="src: #linkButtonsChangeScene" id="btn1" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarLandscape.mp4" data-thumb="#TossaLandscapeThumb"
-              data-first="maphallbutton1" data-rotation="0 0 0" data-scene="1">
+    <a-entity template="src: #linkButtonsChangeScene" id="btn1" data-src="../../videos/tossamar/TossaMarLandscape.mp4"
+              data-thumb="#TossaLandscapeThumb" data-target="#videosphere" data-scene="1"
+              data-first="maphallbutton1" data-rotation="0 0 0" data-rotchild="-15 0 0">
     </a-entity>
 
-    <a-entity template="src: #linkButtonsChangeScene" id="btn2" data-target="#videosphere" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4" data-thumb="#TossaGhoticChurchMainThumb"
-              data-first="maphallbutton2" data-rotation="0 -72 0" data-scene="2">
+    <a-entity template="src: #linkButtonsChangeScene" id="btn2" data-src="../../videos/tossamar/TossaMarGhoticChurchMain.mp4"
+              data-thumb="#TossaGhoticChurchMainThumb" data-target="#videosphere" data-scene="1"
+              data-first="maphallbutton2" data-rotation="0 72 0" data-rotchild="-15 0 0">
     </a-entity>
 
-    <a-entity template="src: #linkButtonsChangeScene" id="btn3" data-target="#videosphere" data-src="../../videos/tossamar/Granados360.mp4" data-thumb="#SofiaRestaurantThumb"
-              data-first="maphallbutton3" data-rotation="0 -144 0" data-scene="3">
+    <a-entity template="src: #linkButtonsChangeScene" id="btn3" data-target="#videosphereGranados"
+              data-src="../../videos/tossamar/Granados360.mp4" data-thumb="#SofiaRestaurantThumb"
+              data-first="maphallbutton3" data-rotation="0 144 0" data-rotchild="-15 0 0" data-scene="2">
     </a-entity>
 
-    <a-entity template="src: #linkButtonsChangeScene" id="btn4" data-target="#videosphere" data-src="../../videos/tossamar/GranadosTerraceOne.mp4" data-thumb="#SofiaChillOutThumb"
-              data-first="maphallbutton4" data-rotation="0 -216 0" data-scene="4">
+    <a-entity template="src: #linkButtonsChangeScene" id="btn4" data-src="../../videos/tossamar/GranadosTerraceOne.mp4"
+              data-thumb="#SofiaChillOutThumb" data-target="#videosphere" data-scene="1"
+              data-first="maphallbutton4" data-rotation="0 216 0" data-rotchild="-15 0 0">
     </a-entity>
 
-    <a-entity template="src: #linkButtonsChangeScene" id="btn5" data-target="#videosphere" data-src="../../videos/tossamar/DianaChimney.mp4" data-thumb="#DianaChimneyRoomThumb"
-              data-first="maphallbutton5" data-rotation="0 -288 0" data-scene="5">
+    <a-entity template="src: #linkButtonsChangeScene" id="btn5" data-target="#videosphereDianaChimney"
+              data-src="../../videos/tossamar/DianaChimney.mp4" data-thumb="#DianaChimneyRoomThumb"
+              data-first="maphallbutton5" data-rotation="0 288 0" data-rotchild="-15 0 0" data-scene="3">
     </a-entity>
 
 </a-entity>
 
+<a-sky id="sky" opacity= "0" color="black" radius = "1" position="0 2 0"
+        ></a-sky>
+
+<!--SCENE ONE-->
 
 <a-entity id="Scene_one_parent" active visible position="0 0 0">
 
     <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
                    autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
 
+    <a-camera visible="false" active="false" id="player1" position="0 0 0">
+        <a-cursor id="cursor1" visible active color="orange"></a-cursor>
+    </a-camera>
+    </a-camera>
+
 
 </a-entity>
 
+<!--SCENE TWO-->
 
 <a-entity id="Scene_two_parent" active visible position="0 0 0">
 
-    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+    <a-videosphere id="videosphereGranados" rotation="0 -110 0" active visible src="#other360"
                    autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+
+    <a-camera visible="false" active="false" id="player2" position="0 0 0">
+        <a-cursor id="cursor2" visible active color="orange"></a-cursor>
+    </a-camera>
+
+    <a-entity id="provisional_buttons_scene_two" position="0.75 1.75 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5"
+              active visible>
+
+        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonthreeone"
+                  data-thumb="#TossaOctopussyChefMarker" data-target="#planeVideo4L"
+                  data-src="../../videos/tossamar/GranadosOctopussySlaughterSBS.mp4" data-scene="4">
+        </a-entity>
+    </a-entity>
+
 </a-entity>
+
+
+<!--SCENE THREE-->
 
 <a-entity id="Scene_three_parent" active visible position="0 0 0">
 
-    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
+    <a-videosphere id="videosphereDianaChimney" rotation="0 -110 0" active visible src="#other360"
                    autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
 
-    <!--
-    ******************************************************************************************************************************************************************************************
-            NON PERSISTENT BUTTONS
-    /*****************************************************************************************************************************************************************************************
-    -->
+    <a-camera visible="false" active="false" id="player3" position="0 0 0">
+        <a-cursor id="cursor3" visible active color="orange"></a-cursor>
+    </a-camera>
 
-    <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
+    <a-entity id="provisional_buttons_scene_three" position="-1.54 1.6 1.14" rotation="-5.5 -215.0 1.5" scale="0.9 0.9 0.9"
+              active visible>
 
-    <a-entity id="provisional_buttons_scene_three" position="0.75 2.25 -2.0" rotation="0.0 -15.0 0.0" scale="0.5 0.5 0.5" active visible>
-
-        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonthreeone" data-thumb="#TossaOctopussyChefMarker" data-target="#videosphere"
-                  data-src="../../videos/tossamar/GranadosOctopusssySlaughter360.mp4">
+        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonfiveone" data-thumb="#DianaChimneyMarker"
+                  data-target="#videosphere"
+                  data-src="../../videos/tossamar/DianaSolarium.mp4" data-scene="1">
         </a-entity>
     </a-entity>
 
-    <!--
-    ******************************************************************************************************************************************************************************************
-        END NON PERSISTENT BUTTONS
-    /*****************************************************************************************************************************************************************************************
-    -->
-
 </a-entity>
 
+
+<!--SCENE FOUR-->
 
 <a-entity id="Scene_four_parent" active visible position="0 0 0">
 
-    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
-                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
-</a-entity>
+    <a-sky id="skyboxframe" rotation="0 -90 0" active visible src="#GranadosRestaurantSkybox"
+            ></a-sky>
 
-<a-entity id="Scene_five_parent" active visible position="0 0 0">
-
-    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
-                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
-
-    <!--
-    ******************************************************************************************************************************************************************************************
-            NON PERSISTENT BUTTONS
-    /*****************************************************************************************************************************************************************************************
-    -->
-
-    <!-- If the audio of the buttons is in the button, they must be near the listener to be audible-->
-
-    <a-entity id="provisional_buttons_scene_five" position="3.0 2.25 -2.0" rotation="0.0 -20.0 0.0" scale="0.5 0.5 0.5" active visible>
-
-        <a-entity template="src: #linkButtonsChangeSceneNoRotation" id="buttonfiveone" data-thumb="#DianaChimneyMarker" data-target="#videosphere"
-                  data-src="../../videos/tossamar/DianaSolarium.mp4">
-        </a-entity>
+    <!-- plane sbs -->
+    <a-entity id="planeSBS" active visble position="0 0 0">
+        <a-plane id="planeVideo4L" scale="8 5 1" material="shader: flat; repeat: 0.5 1; src:#other360" position="0 1 -6"
+                 stereo="eye:left"></a-plane>
+        <a-plane id="planeVideo4R" scale="8 5 1" material="shader: flat; repeat:-0.5 1; src:#other360" position="0 1 -6"
+                 stereo="eye:right"></a-plane>
     </a-entity>
 
-    <!--
-    ******************************************************************************************************************************************************************************************
-        END NON PERSISTENT BUTTONS
-    /*****************************************************************************************************************************************************************************************
-    -->
 
-</a-entity>
+    <!-- Camara sbs -->
+    <a-camera visible="false" active="false" id="player4" position="0 0 0" stereocam="eye:left;">
+        <a-cursor id="cursor4" visible active color="orange"></a-cursor>
+    </a-camera>
 
-<a-entity id="Scene_six_parent" active visible position="0 0 0">
 
-    <a-videosphere id="videosphere" rotation="0 -110 0" active visible src="#other360"
-                   autoplay="false" data-set-image-fade-setup="true" animation__fade=""></a-videosphere>
+    <a-entity template="src: #linkButtonsChangeSceneFull" id="buttonback1" data-thumb="#rmarker" data-target="#videosphereGranados"
+              data-src="../../videos/tossamar/Granados360.mp4"
+              data-first="imgButtonback" data-rotation="0 180 0" data-position="-0.18 0.25 0" data-scene="2"></a-entity>
 
 
 </a-entity>
-
-<!--
-      ******************************************************************************************************************************************************************************************
-              CAMERA
-      /*****************************************************************************************************************************************************************************************
-      -->
-<a-camera camera active="true" visible="true" position="0 0.5 0" id="player1" collider-check>
-    <a-cursor active visible id="cursor1" color="orange" event-set__1="_event:mouseenter; color: springgreen"
-              event-set__2="_event: mouseleave; color: orange" raycaster="objects: .link" material="" cursor=""
-              geometry="" position="" rotation="" scale color="springgreen">
-        <!--
-        <a-animation begin="mouseenter" easing="ease-in" attribute="scale"
-                     fill="backwards" from="1 1 1" to="0.1 0.1 0.1" dur="1500"></a-animation>
-        <a-animation begin="mouseleave" easing="ease-in" attribute="scale"
-                     fill="backwards" from="0.1 0.1 0.1" to=" 1 1 1"></a-animation>
-
-        <a-animation begin="click" easing="ease-in" attribute="scale"
-                     fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-
-        <a-animation begin="fusing" easing="ease-in" attribute="scale"
-                     fill="forwards" from="1 1 1" to="0.1 0.1 0.1"></a-animation>
-        -->
-    </a-cursor>
-</a-camera>
-<!--
-******************************************************************************************************************************************************************************************
-        END CAMERA
-/*****************************************************************************************************************************************************************************************
--->
-
 
 </a-scene>
 
@@ -342,6 +360,7 @@
 
     var scene = document.querySelector("a-scene");
     var videos = document.getElementsByTagName("video");
+    var sky = document.querySelector("a-sky");
 
     console.log("is mobile: " + checkUserAgent() + " " + TYPE_AGENT);
 
@@ -353,32 +372,62 @@
     } else {
         console.log("not loaded");
         document.querySelector("#play-button").style.display = "none";
+        sky.setAttribute("opacity", 1);
         scene.addEventListener('loaded', initCore);
-
         //setVisibleComponent("tempvideosphere");
     }
 
     initScene = function () {
 
-
         //custom init
-        changeTo(GameState.ONE);
+        //Register GameStates
+
+
+        registerState(GameState.ONE);
+        registerState(GameState.TWO);
+        registerState(GameState.THREE);
+        registerState(GameState.FOUR);
+
+        myFunction = onStateChange();
+
         setVisibleComponent("Scene_one_parent", true);
         setVisibleComponent("Scene_two_parent", false);
         setVisibleComponent("Scene_three_parent", false);
         setVisibleComponent("Scene_four_parent", false);
-        setVisibleComponent("Scene_five_parent", false);
-        setVisibleComponent("Scene_six_parent", false);
         //setVisibleComponent("Scene_seven_parent", false);//SBS scene
 
         scaleComponent("Scene_two_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_three_parent", 0.0, 0.0, 0.0);
         scaleComponent("Scene_four_parent", 0.0, 0.0, 0.0);
-        scaleComponent("Scene_five_parent", 0.0, 0.0, 0.0);
-        scaleComponent("Scene_six_parent", 0.0, 0.0, 0.0);
-        //scaleComponent("Scene_seven_parent", 0.0, 0.0, 0.0);//SBS scene set scale to 0.0 0.0 0.0
+
+        setTimeout(function(){
+
+            sky.setAttribute("opacity", 0);
+            sky.setAttribute("visible", false);
+        }, 1000);
+
+
 
     };
+
+    handleOnStateChange = function(){
+        console.log("Handle camera");
+        console.log("Entering handleOnStateChange");
+        setActiveCurrentCamera();
+
+        //recenterPoseCameras(0.0, 0.0, 0.0);//To recenter pose the camera?????????TEST!!!!!!!!!!!
+
+        if(currentState == GameState.FOUR)
+        {
+            scaleComponent("persistentbuttons", 0.0, 0.0, 0.0);
+            setVisibleComponent("persistentbuttons", false);
+        }else
+        {
+            setVisibleComponent("persistentbuttons", true);
+            scaleComponent("persistentbuttons", 1.0, 1.0, 1.0);
+        }
+    };
+
 
 </script>
 
